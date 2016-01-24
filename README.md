@@ -1,5 +1,16 @@
 [![Circle CI](https://circleci.com/gh/meteorhacks/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/meteorhacks/meteord/tree/master)
-## MeteorD - Docker Runtime for Meteor Apps 
+
+# Update note
+
+Update to use Debian Jessie since it includes a newer version of libc6 (2.19).
+
+libc6 2.14+ is required for packages such as https://github.com/lovell/sharp
+
+https://hub.docker.com/r/jimulabs/meteorbase-jessie/
+
+# Original README
+
+## MeteorD - Docker Runtime for Meteor Apps
 
 There are two main ways you can use Docker with Meteor apps. They are:
 
@@ -34,7 +45,7 @@ docker run -d \
     -e MONGO_URL=mongodb://url \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -p 8080:80 \
-    yourname/app 
+    yourname/app
 ~~~
 Then you can access your app from the port 8080 of the host system.
 
@@ -99,7 +110,7 @@ mongo:
   image: mongo:latest
 ~~~
 
-When using Docker Compose to start a Meteor container with a Mongo container as well, we need to wait for the database to start up before we try to start the Meteor app, else the container will fail to start. 
+When using Docker Compose to start a Meteor container with a Mongo container as well, we need to wait for the database to start up before we try to start the Meteor app, else the container will fail to start.
 
 This sample docker-compose.yml file starts up a container that has used meteorhacks/meterod as its base and a mongo container. It also passes along several variables to Meteor needed to start up, specifies the port number the container will listen on, and waits 30 seconds for the mongodb container to start up before starting up the Meteor container.
 
@@ -128,7 +139,7 @@ Fortunately, there is a fix. Simply use [`ongoworks:spiderable`](https://github.
 
 #### Container won't start on Joyent's Triton infrastructure
 
-There's currently (2015-07-18) an issue relating to how the command or entry point is parsed, so containers won't boot using the 'docker run' commands as above. 
+There's currently (2015-07-18) an issue relating to how the command or entry point is parsed, so containers won't boot using the 'docker run' commands as above.
 
 Instead, Joyent support has suggested the following workaround until their fix can be rolled out.
 
